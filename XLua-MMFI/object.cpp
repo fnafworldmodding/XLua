@@ -163,7 +163,28 @@ int Object::NewObject (lua_State* L) {
 	lua_rawget(L, -2);										// +2 = Object Cached Table
 
 	if (lua_istable(L, -1)) {
-		return 1;
+
+		// Ensure that the stored object pointer is the same as the requested one.
+		// If not, MMF is recycling fixed values and the cache is invalidated.
+		// TODO this is basically just a simplification of Object::GetObject that ignores
+		// the fixed value check. The code can be simplified.
+
+		if (lua_getmetatable(L, -1)) {
+			lua_pushstring(L, "__index");
+			lua_rawget(L, -2);
+
+			if (lua_getupvalue(L, -1, UV_OBJECT_LPHO)) {
+				const LPHO cachedObj = (LPHO)lua_touserdata(L, -1);
+				lua_pop(L, 1);
+
+				if (cachedObj == obj) {
+					lua_pop(L, 2);
+					return 1;
+				}
+				// else - fallthrough to the normal code path, replacing the invalidated entry
+			}
+			lua_pop(L, 2);
+		}
 	}
 	lua_pop(L, 1);											// +1
 
