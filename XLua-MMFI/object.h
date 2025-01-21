@@ -118,6 +118,8 @@ public:
 	static int	InkCoef (lua_State* L);
 	static int	Transparent (lua_State* L);
 
+	static int  Image (lua_State* L);
+
 	// Mutators
 
 	static int	SetVisible (lua_State* L);
@@ -133,6 +135,8 @@ public:
 	static int	SetInkEffect (lua_State* L);
 	static int	SetInkCoef (lua_State* L);
 	static int	SetTransparent (lua_State* L);
+
+	static int  SetImage (lua_State* L);
 
 	// Queries
 
@@ -189,6 +193,7 @@ const FunctionPair SpritesRead[] = {
 	{ "actionY",		Sprites::ActionY },
 	{ "angle",			Sprites::Angle },
 	{ "edgeAA",			Sprites::EdgeAA },
+	{ "image",          Sprites::Image },
 	{ "inkCoef",		Sprites::InkCoef },
 	{ "inkEffect",		Sprites::InkEffect },
 	{ "isAbove",		Sprites::IsAbove },
@@ -215,6 +220,7 @@ const FunctionPair SpritesRead[] = {
 const FunctionPair SpritesWrite[] = {
 	{ "angle",			Sprites::SetAngle },
 	{ "edgeAA",			Sprites::SetEdgeAA },
+	{ "image",          Sprites::SetImage },
 	{ "inkCoef",		Sprites::SetInkCoef },
 	{ "inkEffect",		Sprites::SetInkEffect },
 	{ "rotationAA",		Sprites::SetRotationAA },

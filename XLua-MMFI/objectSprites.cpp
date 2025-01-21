@@ -204,6 +204,15 @@ int Sprites::ZOrder (lua_State *L) {
 	return 0;
 }
 
+int Sprites::Image(lua_State* L) {
+	LPHO ho = GetHO(lua_touserdata(L, lua_upvalueindex(UV_OBJECT_LPHO)));
+	tagRCOM* com = GetRCOM(ho);
+
+	lua_pushinteger(L, com->rcImage);
+
+	return 0;
+}
+
 // Mutators
 
 int Sprites::SetAngle (lua_State *L) {
@@ -408,6 +417,18 @@ int Sprites::SetVisible (lua_State* L) {
 		spr->rsFlags = (spr->rsFlags & ~RSFLAG_HIDDEN) | (nflag << 0);
 		spr->rsCreaFlags = (spr->rsCreaFlags & ~SF_HIDDEN) | (nflag << 7);
 	}
+
+	com->rcChanged = 1;
+
+	return 0;
+}
+
+
+int Sprites::SetImage(lua_State* L) {
+	LPHO ho = GetHO(lua_touserdata(L, lua_upvalueindex(UV_OBJECT_LPHO)));
+	tagRCOM* com = GetRCOM(ho);
+
+	com->rcImage = lua_tointeger(L, PARAM1);
 
 	com->rcChanged = 1;
 
