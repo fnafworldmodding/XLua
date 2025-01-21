@@ -90,6 +90,12 @@
     <ClCompile Include="xsdk_surfaceref.cpp">
       <Filter>Source Files\XSDK</Filter>
     </ClCompile>
+    <ClCompile Include="CommonFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class.h">
@@ -262,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="..\rSDK\Inc\WrapFunctions.h">
       <Filter>MMF Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

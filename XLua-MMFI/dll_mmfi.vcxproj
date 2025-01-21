@@ -131,9 +131,11 @@
     <ClCompile Include="class.cpp" />
     <ClCompile Include="collisions.cpp" />
     <ClCompile Include="common.cpp" />
+    <ClCompile Include="CommonFrame.cpp" />
     <ClCompile Include="extSurface.cpp" />
     <ClCompile Include="extXLuaSurface.cpp" />
     <ClCompile Include="frame.cpp" />
+    <ClCompile Include="helper.cpp" />
     <ClCompile Include="inputKeyboard.cpp" />
     <ClCompile Include="inputMouse.cpp" />
     <ClCompile Include="kcArray.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="ext.h" />
     <ClInclude Include="extobject.h" />
     <ClInclude Include="frame.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="inline.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="kc.h" />
