@@ -278,15 +278,15 @@ public:
 };
 
 const FunctionPair AnimationsRead[] = {
+	{ "animDir",		Animations::AnimationDirection },
 	{ "animFrame",		Animations::AnimationFrame },
 	{ "animSet",		Animations::AnimationSet },
-	{ "animDir",		Animations::AnimationDirection },
 };
 
 const FunctionPair AnimationsWrite[] = {
+	{ "animDir",		Animations::SetAnimationDirection },
 	{ "animFrame",		Animations::SetAnimationFrame },
 	{ "animSet",		Animations::SetAnimationSet },
-	{ "animDir",		Animations::SetAnimationDirection },
 };
 
 class Values {
