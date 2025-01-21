@@ -12,6 +12,13 @@ public:
 	// Getters 
 
 	static int	FrameRate (lua_State* L);
+	// Frames Getters
+
+	static int  StartingFrameId(lua_State* L);
+	static int  NextFrameId(lua_State* L);
+	static int  CurrentFrameId(lua_State* L);
+	static int  CurrentFrameName(lua_State* L);
+	static int  FramesCount(lua_State* L);
 
 	// Queries
 
@@ -29,6 +36,17 @@ public:
 	static int	SetPlayerLives (lua_State* L);
 	static int	SetPlayerLivesFunc (lua_State* L);
 
+	// Frame Actions
+	static int	NextFrame(lua_State* L);
+	static int	PreviousFrame(lua_State* L);
+	static int	JumpToFrame(lua_State* L);
+	static int	RestartFrame(lua_State* L);
+
+	// App Actions
+	static int	RestartGame(lua_State* L);
+	static int	PauseGame(lua_State* L);
+	static int	CloseGame(lua_State* L);
+
 public:
 
 	static int	IndexMetamethod (lua_State* L);
@@ -36,7 +54,7 @@ public:
 
 	static int	MemoClosure (lua_State* L, const char* key, lua_CFunction lfunc);
 	//
-	static inline CRunApp* Runtime::GetParentApp(LPRH rh);
+	static inline CRunApp* Runtime::GetParentApp (LPRH rh);
 };
 
 const FunctionPair RuntimeRead[] = {

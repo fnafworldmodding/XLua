@@ -187,3 +187,116 @@ int Runtime::SetPlayerLivesFunc (lua_State* L) {
 	app->m_pLives[player - 1] = ~lives;
 	return 0;
 }
+
+// -----
+// maybe copy over to Frame?
+
+int Runtime::StartingFrameId(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    CRunApp* app = GetParentApp(rh);
+    lua_pushinteger(L, app->m_startFrame);
+    return 1;
+}
+
+int Runtime::NextFrameId(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    CRunApp* app = GetParentApp(rh);
+    lua_pushinteger(L, app->m_nextFrame);
+    return 1;
+}
+
+int Runtime::CurrentFrameId(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    CRunApp* app = GetParentApp(rh);
+    lua_pushinteger(L, app->m_nCurrentFrame);
+    return 1;
+}
+
+int Runtime::CurrentFrameName(lua_State* L) {
+	// TODO: move this to Frame
+	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+	if (!rh || !rh->rhFrame || !rh->rhFrame->m_name) return 0;
+
+	lua_pushstring(L, rh->rhFrame->m_name);
+	return 1;
+}
+
+
+int Runtime::FramesCount(lua_State* L) {
+	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+	if (!rh || !rh->rhFrame || !rh->rhFrame->m_name) return 0;
+
+	CRunApp* app = GetParentApp(rh);
+
+	lua_pushinteger(L, app->m_frameMaxIndex);
+	return 1;
+}
+
+// ----
+
+int Runtime::NextFrame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 1;
+    return 0;
+}
+
+int Runtime::PreviousFrame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 2;
+    return 0;
+}
+
+int Runtime::JumpToFrame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    if (lua_gettop(L) < 1)
+        return 0;
+
+    int frame_id = lua_tointeger(L, 1);
+    rh->rhQuit = 3;
+    rh->rhQuitParam = frame_id;
+    return 0;
+}
+
+int Runtime::RestartGame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 4;
+    return 0;
+}
+
+int Runtime::PauseGame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 5;
+    return 0;
+}
+
+int Runtime::RestartFrame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 101;
+    return 0;
+}
+
+int Runtime::CloseGame(lua_State* L) {
+    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+    if (!rh) return 0;
+
+    rh->rhQuit = 6;
+    return 0;
+}
