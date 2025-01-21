@@ -229,7 +229,7 @@ int Runtime::LoadImageFromPath(lua_State* L) {
 	// Get the path from the Lua stack
     const char* path = lua_tostring(L, 1);
     if (!path) {
-        luaL_error(L, "Path not found or is nil");
+        luaL_error(L, "path is required");
         return 0;
     }
 
