@@ -74,6 +74,16 @@ int Runtime::NewRuntime (lua_State* L) {
 	return 1;
 }
 
+
+inline CRunApp* Runtime::GetParentApp(LPRH rh) {
+	CRunApp* app = rh->rhApp;
+	while (app->m_pParentApp && app->m_bShareScores) {
+		app = app->m_pParentApp;
+	}
+
+	return app;
+}
+
 // -----
 
 int Runtime::FrameRate (lua_State* L) {
@@ -101,10 +111,7 @@ int Runtime::PlayerScoreFunc (lua_State* L) {
 	if (player < 1 || player > 4)
 		return 0;
 
-	CRunApp* app = rh->rhApp;
-	while (app->m_pParentApp && app->m_bShareScores) {
-		app = app->m_pParentApp;
-	}
+	CRunApp* app = GetParentApp(rh);
 
 	lua_pushinteger(L, ~app->m_pScores[player - 1]);
 	return 1;
@@ -125,10 +132,7 @@ int Runtime::PlayerLivesFunc (lua_State* L) {
 	if (player < 1 || player > 4)
 		return 0;
 
-	CRunApp* app = rh->rhApp;
-	while (app->m_pParentApp && app->m_bShareScores) {
-		app = app->m_pParentApp;
-	}
+	CRunApp* app = GetParentApp(rh);
 
 	lua_pushinteger(L, ~app->m_pLives[player - 1]);
 	return 1;
@@ -154,10 +158,7 @@ int Runtime::SetPlayerScoreFunc (lua_State* L) {
 
 	int score = lua_tointeger(L, 2);
 
-	CRunApp* app = rh->rhApp;
-	while (app->m_pParentApp && app->m_bShareScores) {
-		app = app->m_pParentApp;
-	}
+	CRunApp* app = GetParentApp(rh);
 
 	app->m_pScores[player - 1] = ~score;
 	return 0;
@@ -181,10 +182,7 @@ int Runtime::SetPlayerLivesFunc (lua_State* L) {
 
 	int lives = lua_tointeger(L, 2);
 
-	CRunApp* app = rh->rhApp;
-	while (app->m_pParentApp && app->m_bShareScores) {
-		app = app->m_pParentApp;
-	}
+	CRunApp* app = GetParentApp(rh);
 
 	app->m_pLives[player - 1] = ~lives;
 	return 0;

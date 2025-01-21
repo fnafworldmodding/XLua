@@ -8,6 +8,7 @@ public:
 
 	static int	NewRuntime (lua_State* L);
 
+
 	// Getters 
 
 	static int	FrameRate (lua_State* L);
@@ -34,6 +35,8 @@ public:
 	static int	NewIndexMetamethod (lua_State* L);
 
 	static int	MemoClosure (lua_State* L, const char* key, lua_CFunction lfunc);
+	//
+	static inline CRunApp* Runtime::GetParentApp(LPRH rh);
 };
 
 const FunctionPair RuntimeRead[] = {
