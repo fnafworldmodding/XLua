@@ -1,4 +1,6 @@
 #include "runtime.h"
+#include "frame.h"
+#include "helper.h"
 
 int Runtime::IndexMetamethod (lua_State* L) {
 	if (lua_tointeger(L, lua_upvalueindex(UV_TYPE)) != TYPE_STATIC)
@@ -7,6 +9,9 @@ int Runtime::IndexMetamethod (lua_State* L) {
 	const char* key = lua_tostring(L, 2);
 
 	int ret = StandardIndex(L, RuntimeRead, RuntimeWrite);
+	if (ret > -1) return ret;
+
+	int ret = StandardNewIndex(L, CommonFrameRead, CommonFrameWrite);
 	if (ret > -1) return ret;
 
 	ret = Globals::GlobalsIndex(L);
@@ -72,16 +77,6 @@ int Runtime::NewRuntime (lua_State* L) {
 	lua_setmetatable(L, -2);								// +1
 
 	return 1;
-}
-
-
-inline CRunApp* Runtime::GetParentApp(LPRH rh) {
-	CRunApp* app = rh->rhApp;
-	while (app->m_pParentApp && app->m_bShareScores) {
-		app = app->m_pParentApp;
-	}
-
-	return app;
 }
 
 // -----
@@ -188,46 +183,6 @@ int Runtime::SetPlayerLivesFunc (lua_State* L) {
 	return 0;
 }
 
-// -----
-// maybe copy over to Frame?
-
-int Runtime::StartingFrameId(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    CRunApp* app = GetParentApp(rh);
-    lua_pushinteger(L, app->m_startFrame);
-    return 1;
-}
-
-int Runtime::NextFrameId(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    CRunApp* app = GetParentApp(rh);
-    lua_pushinteger(L, app->m_nextFrame);
-    return 1;
-}
-
-int Runtime::CurrentFrameId(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    CRunApp* app = GetParentApp(rh);
-    lua_pushinteger(L, app->m_nCurrentFrame);
-    return 1;
-}
-
-int Runtime::CurrentFrameName(lua_State* L) {
-	// TODO: move this to Frame
-	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-	if (!rh || !rh->rhFrame || !rh->rhFrame->m_name) return 0;
-
-	lua_pushstring(L, rh->rhFrame->m_name);
-	return 1;
-}
-
-
 int Runtime::FramesCount(lua_State* L) {
 	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
 	if (!rh || !rh->rhFrame || !rh->rhFrame->m_name) return 0;
@@ -239,35 +194,6 @@ int Runtime::FramesCount(lua_State* L) {
 }
 
 // ----
-
-int Runtime::NextFrame(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    rh->rhQuit = 1;
-    return 0;
-}
-
-int Runtime::PreviousFrame(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    rh->rhQuit = 2;
-    return 0;
-}
-
-int Runtime::JumpToFrame(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    if (lua_gettop(L) < 1)
-        return 0;
-
-    int frame_id = lua_tointeger(L, 1);
-    rh->rhQuit = 3;
-    rh->rhQuitParam = frame_id;
-    return 0;
-}
 
 int Runtime::RestartGame(lua_State* L) {
     LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
@@ -285,18 +211,37 @@ int Runtime::PauseGame(lua_State* L) {
     return 0;
 }
 
-int Runtime::RestartFrame(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    rh->rhQuit = 101;
-    return 0;
-}
-
 int Runtime::CloseGame(lua_State* L) {
     LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
     if (!rh) return 0;
 
     rh->rhQuit = 6;
     return 0;
+}
+
+/////////////////////////////////////////
+
+int Runtime::LoadImageFromPath(lua_State* L) {
+	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+	if (!rh) return 0;
+	mv* p_mv = rh->rh4.rh4Mv;
+
+	// Get the path from the Lua stack
+    const char* path = lua_tostring(L, 1);
+    if (!path) {
+        luaL_error(L, "Path not found or is nil");
+        return 0;
+    }
+
+	// Get optional arguments from the Lua stack or use default values
+	int hotSpotX = lua_isnumber(L, 2) ? lua_tointeger(L, 2) : 0;
+	int hotSpotY = lua_isnumber(L, 3) ? lua_tointeger(L, 3) : 0;
+	int actionPointX = lua_isnumber(L, 4) ? lua_tointeger(L, 4) : 0;
+	int actionPointY = lua_isnumber(L, 5) ? lua_tointeger(L, 5) : 0;
+	int loadflags = lua_isnumber(L, 6) ? lua_tointeger(L, 6) : LI_NONE;
+
+	// Load the image using the helper function with mv pointer
+	lua_pushnumber(L, CreateImageFromFile(p_mv, path, hotSpotX, hotSpotY, actionPointX, actionPointY, (LIFlags)loadflags));
+
+	return 1; // Number of return values
 }

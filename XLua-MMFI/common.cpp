@@ -245,3 +245,13 @@ tagRV* GetRV (LPHO ho) {
 		return (tagRV*)((char*)ho + sizeof(headerObject));
 	}
 }
+
+
+static inline CRunApp* GetParentApp(LPRH rh) {
+	CRunApp* app = rh->rhApp;
+	while (app->m_pParentApp && app->m_bShareScores) {
+		app = app->m_pParentApp;
+	}
+
+	return app;
+}

@@ -54,4 +54,53 @@ const FunctionPair FrameWrite[] = {
 	{ 0, 0 },
 };
 
+
+class CommonFrame {
+public:
+
+	static int	NewCommonFrame(lua_State* L);
+
+	// Getters 
+
+	static int  StartingFrameId(lua_State* L);
+	static int  NextFrameId(lua_State* L);
+	static int  CurrentFrameId(lua_State* L);
+	static int  CurrentFrameName(lua_State* L);
+
+	// Queries
+
+
+	// Frame Actions
+	static int	NextFrame(lua_State* L);
+	static int	NextFrameFunc(lua_State* L);
+	static int	PreviousFrame(lua_State* L);
+	static int	PreviousFrameFunc(lua_State* L);
+	static int	JumpToFrame(lua_State* L);
+	static int	JumpToFrameFunc(lua_State* L);
+	static int	RestartFrame(lua_State* L);
+	static int	RestartFrameFunc(lua_State* L);
+
+public:
+
+	static int	IndexMetamethod(lua_State* L);
+	static int	NewIndexMetamethod(lua_State* L);
+
+	static int	MemoClosure(lua_State* L, const char* key, lua_CFunction lfunc);
+};
+
+const FunctionPair CommonFrameRead[] = {
+	{ "currentFrameId",		CommonFrame::CurrentFrameId },
+	{ "currentFrameName",	CommonFrame::CurrentFrameName },
+	{ "jumpToFrame",		CommonFrame::JumpToFrame },
+	{ "nextFrame",			CommonFrame::NextFrame },
+	{ "nextFrameId",		CommonFrame::NextFrameId },
+	{ "previousFrame",		CommonFrame::PreviousFrame },
+	{ "restartFrame",		CommonFrame::RestartFrame },
+	{ "startingFrameId",	CommonFrame::StartingFrameId },
+};
+
+const FunctionPair CommonFrameWrite[] = {
+	{ 0, 0 },
+};
+
 #endif
