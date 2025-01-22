@@ -264,12 +264,14 @@ public:
 	static int	AnimationSet (lua_State* L);
 	static int	AnimationFrame (lua_State* L);
 	static int  AnimationDirection (lua_State* L);
+	static int  AnimationSpeed (lua_State* L);
 
 	// Mutators
 
 	static int	SetAnimationSet (lua_State* L);
 	static int	SetAnimationFrame (lua_State* L);
 	static int  SetAnimationDirection (lua_State* L);
+	static int  SetAnimationSpeed (lua_State* L);
 
 public:
 
@@ -281,12 +283,14 @@ const FunctionPair AnimationsRead[] = {
 	{ "animDir",		Animations::AnimationDirection },
 	{ "animFrame",		Animations::AnimationFrame },
 	{ "animSet",		Animations::AnimationSet },
+	{ "animSpeed",		Animations::AnimationSpeed },
 };
 
 const FunctionPair AnimationsWrite[] = {
 	{ "animDir",		Animations::SetAnimationDirection },
 	{ "animFrame",		Animations::SetAnimationFrame },
 	{ "animSet",		Animations::SetAnimationSet },
+	{ "animSpeed",		Animations::SetAnimationSpeed },
 };
 
 class Values {

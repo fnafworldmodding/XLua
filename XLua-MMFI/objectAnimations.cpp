@@ -46,6 +46,16 @@ int Animations::AnimationDirection(lua_State* L) {
 	return 1;
 }
 
+int Animations::AnimationSpeed(lua_State* L) {
+	LPHO ho = GetHO(lua_touserdata(L, lua_upvalueindex(UV_OBJECT_LPHO)));
+	tagRA* ra = GetRA(ho);
+
+	lua_pushnumber(L, ra->raAnimSpeed);
+
+	return 1;
+}
+
+
 // Mutators
 
 int Animations::SetAnimationFrame (lua_State *L) {
@@ -82,6 +92,19 @@ int Animations::SetAnimationDirection(lua_State* L) {
 
 	return 1;
 }
+
+
+int Animations::SetAnimationSpeed(lua_State* L) {
+	LPHO ho = GetHO(lua_touserdata(L, lua_upvalueindex(UV_OBJECT_LPHO)));
+	tagRCOM* com = GetRCOM(ho);
+	tagRA* ra = GetRA(ho);
+
+	ra->raAnimSpeed = lua_tonumber(L, PARAM1);
+	com->rcChanged = 1;
+
+	return 1;
+}
+
 
 
 // -------------
