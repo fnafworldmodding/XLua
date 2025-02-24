@@ -208,9 +208,9 @@ int Sprites::Image(lua_State* L) {
 	LPHO ho = GetHO(lua_touserdata(L, lua_upvalueindex(UV_OBJECT_LPHO)));
 	tagRCOM* com = GetRCOM(ho);
 
-	lua_pushinteger(L, com->rcImage);
+	lua_pushnumber(L, com->rcImage);
 
-	return 0;
+	return 1;
 }
 
 // Mutators
