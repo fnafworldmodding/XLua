@@ -11,7 +11,7 @@ int Runtime::IndexMetamethod (lua_State* L) {
 	int ret = StandardIndex(L, RuntimeRead, RuntimeWrite);
 	if (ret > -1) return ret;
 
-	int ret = StandardNewIndex(L, CommonFrameRead, CommonFrameWrite);
+	ret = StandardNewIndex(L, CommonFrameRead, CommonFrameWrite);
 	if (ret > -1) return ret;
 
 	ret = Globals::GlobalsIndex(L);
@@ -196,14 +196,21 @@ int Runtime::FramesCount(lua_State* L) {
 // ----
 
 int Runtime::RestartGame(lua_State* L) {
-    LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
-    if (!rh) return 0;
-
-    rh->rhQuit = 4;
-    return 0;
+	return Runtime::MemoClosure(L, lua_tostring(L, 2), Runtime::RestartGameFunc);
 }
 
+int Runtime::RestartGameFunc(lua_State* L) {
+	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+	if (!rh) return 0;
+
+	rh->rhQuit = (short)4;
+	return 0;
+}
 int Runtime::PauseGame(lua_State* L) {
+    return Runtime::MemoClosure(L, lua_tostring(L, 2), Runtime::PauseGameFunc);
+}
+
+int Runtime::PauseGameFunc(lua_State* L) {
     LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
     if (!rh) return 0;
 
@@ -212,6 +219,10 @@ int Runtime::PauseGame(lua_State* L) {
 }
 
 int Runtime::CloseGame(lua_State* L) {
+    return Runtime::MemoClosure(L, lua_tostring(L, 2), Runtime::CloseGameFunc);
+}
+
+int Runtime::CloseGameFunc(lua_State* L) {
     LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
     if (!rh) return 0;
 
@@ -243,5 +254,5 @@ int Runtime::LoadImageFromPath(lua_State* L) {
 	// Load the image using the helper function with mv pointer
 	lua_pushnumber(L, CreateImageFromFile(p_mv, path, hotSpotX, hotSpotY, actionPointX, actionPointY, (LIFlags)loadflags));
 
-	return 1; // Number of return values
+	return 1;
 }

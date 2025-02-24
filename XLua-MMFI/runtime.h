@@ -31,9 +31,12 @@ public:
 	static int	SetPlayerLivesFunc (lua_State* L);
 
 	// App Actions
-	static int	RestartGame(lua_State* L);
-	static int	PauseGame(lua_State* L);
-	static int	CloseGame(lua_State* L);
+	static int	RestartGame (lua_State* L);
+	static int  RestartGameFunc (lua_State* L);
+	static int	PauseGame (lua_State* L);
+	static int	PauseGameFunc (lua_State* L);
+	static int	CloseGame (lua_State* L);
+	static int	CloseGameFunc (lua_State* L);
 
 	// _
 
@@ -46,11 +49,11 @@ public:
 
 	static int	MemoClosure (lua_State* L, const char* key, lua_CFunction lfunc);
 };
-
 const FunctionPair RuntimeRead[] = {
 	{ "frameRate",		Runtime::FrameRate },
 	{ "playerLives",	Runtime::PlayerLives },
 	{ "playerScore",	Runtime::PlayerScore },
+	{ "restartGame",	Runtime::RestartGame }, // fixme: it should be activated when called only, not on access
 	{ "setPlayerLives",	Runtime::SetPlayerLives },
 	{ "setPlayerScore",	Runtime::SetPlayerScore },
 };
