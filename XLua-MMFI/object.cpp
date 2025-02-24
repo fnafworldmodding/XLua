@@ -149,7 +149,7 @@ int Object::NewObject (lua_State* L) {
 	if (base <= 0)
 		return 0;
 
-	lua_checkstack(L, base + 10);
+	lua_checkstack(L, base + 20);
 
 	uint32_t fixed = lua_tointeger(L, 1);
 	LPHO obj = rh->rhObjectList[fixed & 0xFFFF].oblOffset;

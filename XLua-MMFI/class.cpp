@@ -266,6 +266,14 @@ int ObjectClass::ObjectList (lua_State* L) {
 	LPOIL oi = (LPOIL)lua_touserdata(L, lua_upvalueindex(UV_CLASS_LPOIL));
 	LPOBL objList = rh->rhObjectList;
 
+	int base = lua_gettop(L);								// +0
+	if (base <= 0)
+		return 0;
+
+	// making extra space for NewObject stack and also space for the while loop below
+	// also check this, does this function really need 15?
+	lua_checkstack(L, base + (oi->oilNObjects*15) + 1);
+
 	lua_createtable(L, 0, oi->oilNObjects);
 	if (oi->oilNObjects == 0)
 		return 1;
