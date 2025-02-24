@@ -27,7 +27,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -79,7 +79,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>mmfs2.lib;..\XLua\Debug\xlua.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>C:\Users\ACER\Desktop\fwmod-mfa</OutputFile>
+      <OutputFile>C:\Users\ACER\Desktop\fwmod-mfa\mmfi.dll</OutputFile>
       <AdditionalLibraryDirectories>..\XLua\Release;..\rSDK\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
