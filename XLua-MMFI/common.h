@@ -152,8 +152,14 @@ int StandardIndex (lua_State* L, const FunctionPair (&fpRead)[N1], const Functio
 template <int N1, int N2>
 int StandardNewIndex (lua_State* L, const FunctionPair (&fpRead)[N1], const FunctionPair (&fpWrite)[N2]);
 
-static inline CRunApp* GetParentApp(LPRH rh);
+static inline CRunApp* GetParentApp(LPRH rh) {
+	CRunApp* app = rh->rhApp;
+	while (app->m_pParentApp && app->m_bShareScores) {
+		app = app->m_pParentApp;
+	}
 
+	return app;
+}
 #include "inline.h"
 
 #endif
