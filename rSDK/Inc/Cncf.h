@@ -3609,6 +3609,7 @@ typedef	struct	tagRs {
 		long			rsMaxi;				// 
 		long			rsLevel;
 	};
+	BYTE            rsIgnore[174];      // important to correctly offset rsValue
 	CValue			rsValue;
 	LONG			rsBoxCx;			// Dimensions box (for lives, counters, texts)
 	LONG			rsBoxCy;			

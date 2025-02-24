@@ -35,9 +35,9 @@ const FunctionPair CounterRead[] = {
 };
 
 const FunctionPair CounterWrite[] = {
-	{ "maxValue",	System::MaxValue },
-	{ "minValue",	System::MinValue },
-	{ "value",		System::Value },
+	{ "maxValue",	System::SetValue },
+	{ "minValue",	System::SetMinValue },
+	{ "value",		System::SetValue },
 };
 
 class Text {
