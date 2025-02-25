@@ -19,6 +19,9 @@ public:
 	static int	Width (lua_State* L);
 	static int	Height (lua_State* L);
 
+	// --
+	static int  Focused (lua_State* L);
+
 public:
 
 	static int	IndexMetamethod (lua_State* L);
@@ -30,6 +33,7 @@ public:
 const FunctionPair WindowRead[] = {
 	{ "clientHeight",	Window::ClientHeight },
 	{ "clientWidth",	Window::ClientWidth },
+	{ "focused",		Window::Focused },
 	{ "frameWidth",		Window::FrameWidth },
 	{ "frameHeight",	Window::FrameHeight },
 	{ "height",			Window::Height },

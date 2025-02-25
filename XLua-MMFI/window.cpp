@@ -136,3 +136,16 @@ int Window::Height (lua_State* L) {
 	lua_pushnumber(L, rc.bottom - rc.top);
 	return 1;
 }
+
+// --
+
+int Window::Focused(lua_State* L) {
+	LPRH rh = (LPRH)lua_touserdata(L, lua_upvalueindex(UV_STATIC_RH));
+	if (!rh) return 0;
+
+	HWND hwnd = rh->rhHMainWin;
+	HWND focused = GetForegroundWindow();
+
+	lua_pushboolean(L, hwnd == focused);
+	return 1;
+}
