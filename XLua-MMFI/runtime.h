@@ -49,11 +49,16 @@ public:
 
 	static int	MemoClosure (lua_State* L, const char* key, lua_CFunction lfunc);
 };
+
 const FunctionPair RuntimeRead[] = {
+	{ "closeGame",		Runtime::CloseGame },
 	{ "frameRate",		Runtime::FrameRate },
+	{ "framesCount",	Runtime::FramesCount },
+	{ "loadImageFromPath", Runtime::LoadImageFromPath }, // TODO: test function in lua
+	{ "pauseGame",		Runtime::PauseGame },
 	{ "playerLives",	Runtime::PlayerLives },
 	{ "playerScore",	Runtime::PlayerScore },
-	{ "restartGame",	Runtime::RestartGame }, // fixme: it should be activated when called only, not on access
+	{ "restartGame",	Runtime::RestartGame }, // fixme: doesn't actived properly
 	{ "setPlayerLives",	Runtime::SetPlayerLives },
 	{ "setPlayerScore",	Runtime::SetPlayerScore },
 };
