@@ -16,3 +16,6 @@ External Dependencies:
 
 Most projects depend on either the official MMF SDK (referenced in projects as vendor/SDK/current), or rSDK.
 These dependencies can be obtained from the Extension Development forum on Clickteam's message board.
+
+NOTE for the sake of me, if you encountered linking errors with luajit, you compiled it with the incorrect vs tools, you must use VS2015 x86 Native Tools Command Prompt and make sure that xlua (extension) platform tools is set to "Visual Studio 2015 - Windows XP (v140_xp)"
+otherwise you will spent your whole day pointlessly
