@@ -17,7 +17,7 @@ int Object::IndexMetamethod (lua_State* L) {
 	bool valid = ObjectCheck(L);
 	const char* key = lua_tostring(L, 2);
 
-	if (!strcmp(key, "alive")) {
+	if (strcmp(key, "alive") == 0) {
 		lua_pushboolean(L, valid);
 		return 1;
 	}
