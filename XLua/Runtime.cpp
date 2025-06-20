@@ -81,6 +81,9 @@ short WINAPI DLLExport CreateRunObject(LPRDATA rdPtr, LPEDATA edPtr, fpcob cobPt
 			rdPtr->luaMan->state->mmfi.RegisterWin();
 		}
 #endif
+		if (edPtr->useDISPATCHER) {
+			rdPtr->luaMan->state->dispatcheri.Register(rdPtr->luaMan->state);
+		}
 
 		if (edPtr->loadLibs) {
 			rdPtr->luaMan->state->LoadDefaultLib(XLuaState::PACKAGE_ALL);

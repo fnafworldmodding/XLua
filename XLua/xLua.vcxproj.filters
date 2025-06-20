@@ -183,6 +183,9 @@
     <ClCompile Include="LuaJIT-2.0.5\src\xlua.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LuaDispatcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CallStackFrame.h">
@@ -414,6 +417,9 @@
       <Filter>MMF Headers</Filter>
     </ClInclude>
     <ClInclude Include="UnicodeHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaDispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

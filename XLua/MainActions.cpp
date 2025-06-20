@@ -374,11 +374,21 @@ short WINAPI DLLExport ActSetLocalStr(LPRDATA rdPtr, long param1, long param2) {
 
 // ActEnableMMFI ()
 short WINAPI DLLExport ActEnableMMFI(LPRDATA rdPtr, long param1, long param2) {
-	#ifdef XLUA_LEGACY
+#ifdef XLUA_LEGACY
 	if (rdPtr->luaMan->state) {
 		rdPtr->luaMan->state->mmfi.Register();
 	}
-	#endif
+#endif
+	return 0;
+}
+
+// ActEnableDISPATCHERI ()
+short WINAPI DLLExport ActEnableDISPATCHERI(LPRDATA rdPtr, long param1, long param2) {
+#ifdef XLUA_LEGACY
+	if (rdPtr->luaMan->state) {
+		rdPtr->luaMan->state->dispatcheri.Register(rdPtr->luaMan->state);
+	}
+#endif
 	return 0;
 }
 

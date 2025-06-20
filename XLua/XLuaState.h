@@ -13,6 +13,7 @@
 	#include	"LuaXLua.h"
 	#include	"LuaMMF.h"
 #endif
+#include "LuaDispatcher.h"
 
 typedef struct tagRO RunObject;
 typedef RunObject* LPRO;
@@ -95,11 +96,12 @@ public:
 	typedef std::unordered_map<int, MFObject>::iterator		IObjects;
 	typedef std::unordered_map<unsigned, unsigned>::iterator	IWinExports;
 #endif
-
 	enum LuaPackage {
 		PACKAGE_ALL, PACKAGE_BASE, PACKAGE_IO, PACKAGE_TABLE, PACKAGE_PACKAGE, PACKAGE_OS, PACKAGE_STRING, 
 		PACKAGE_DEBUG, PACKAGE_MATH, PACKAGE_JIT, PACKAGE_FFI, PACKAGE_BIT, PACKAGE_GL, PACKAGE_XLUA
 	};
+
+	LuaDispatcher dispatcheri;
 
 public:
 
