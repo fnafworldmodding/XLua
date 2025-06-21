@@ -287,7 +287,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>LuaJIT-2.0.5\bin\lua51.lib;odbc32.lib;odbccp32.lib;mmfs2.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)xlua.mfx</OutputFile>
+      <OutputFile>$(OutDir)Extensions\xlua.mfx</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\rSDK\Lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\Ext.def</ModuleDefinitionFile>
@@ -341,7 +341,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>LuaJIT-2.0.5\bin\lua51.lib;odbc32.lib;odbccp32.lib;mmfs2.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>c:\Program Files (x86)\Clickteam Fusion Developer 2.5\Extensions\Unicode\xlua.mfx</OutputFile>
+      <OutputFile>$(OutDir)Extensions\Unicode\\xlua.mfx</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\rSDK\Lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\Ext.def</ModuleDefinitionFile>
