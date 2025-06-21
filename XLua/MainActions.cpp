@@ -42,7 +42,8 @@ short actionsInfos[] = {
 	IDMN_ACT_ENABLE_MMFI,				M_ACT_ENABLE_MMFI,				ACT_ENABLE_MMFI,				0,				0,
 	IDMN_ACT_ENABLE_JIT,				M_ACT_ENABLE_JIT,				ACT_ENABLE_JIT,					0,				0,
 	IDMN_ACT_OPEN_LIBS_JIT,				M_ACT_OPEN_LIBS_JIT,			ACT_OPEN_LIBS_JIT,				0,				0,
-	IDMN_ACT_ENABLE_WINI,				M_ACT_ENABLE_WINI,				ACT_ENABLE_WINI,				0,				0,
+	IDMN_ACT_ENABLE_WINI,				M_ACT_ENABLE_DISPATCHERI,		ACT_ENABLE_DISPATCHERI,			0,				0, // NO ONE WOULD KNOW AND NO ONE SHOULD KNOW
+	IDMN_ACT_ENABLE_DISPATCHER,			M_ACT_ENABLE_WINI,				ACT_ENABLE_WINI,				0,				0, // fixme: fix the action not being triggered upon pressing it in the menu, IDMN_ACT_ENABLE_DISPATCHER item is the issue
 	IDMN_ACT_RESET_STATE,				M_ACT_RESET_STATE,				ACT_RESET_STATE,				0,				0,
 	IDMN_ACT_RESET_LOCAL_STORE,			M_ACT_RESET_LOCAL_STORE,		ACT_RESET_LOCAL_STORE,			0,				0,
 	IDMN_ACT_RESET_MMFI_EXPORTS,		M_ACT_RESET_MMFI_EXPORTS,		ACT_RESET_MMFI_EXPORTS,			0,				0,
@@ -103,7 +104,7 @@ short WINAPI DLLExport ActRunSourceFile(LPRDATA rdPtr, long param1, long param2)
 	}
 
 	return 0;
-}
+} 
 
 // ActRunSourceString (TCHAR* source)
 short WINAPI DLLExport ActRunSourceString(LPRDATA rdPtr, long param1, long param2) {
@@ -996,5 +997,6 @@ short (WINAPI* ActionJumps[])(LPRDATA rdPtr, long param1, long param2) = {
 	ActPushTableReturnStart,
 	ActPushTableReturnEnd,
 	ActOpenFFILib,
+	ActEnableDISPATCHERI,
 	0
 };
