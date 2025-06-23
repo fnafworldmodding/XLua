@@ -12,6 +12,7 @@
 int CallStack::EventNumber () const {
 	auto rh = _state->rdList.front()->rdPtr->rHo.hoAdRunHeader;
 	static bool isMMF25 = (rh->rh4.rh4Mv->mvGetVersion() & MMFVERSION_MASK) == MMFVERSION_25;
+	if (rh->rhEventGroup == nullptr) return -1;
 	if (isMMF25) {
 		return rh->rhEventGroup->evgInhibit;
 	}
