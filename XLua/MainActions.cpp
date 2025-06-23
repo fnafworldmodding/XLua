@@ -385,11 +385,16 @@ short WINAPI DLLExport ActEnableMMFI(LPRDATA rdPtr, long param1, long param2) {
 
 // ActEnableDISPATCHERI ()
 short WINAPI DLLExport ActEnableDISPATCHERI(LPRDATA rdPtr, long param1, long param2) {
-#ifdef XLUA_LEGACY
-	if (rdPtr->luaMan->state) {
-		rdPtr->luaMan->state->dispatcheri.Register(rdPtr->luaMan->state);
+	if (rdPtr->luaMan->state == nullptr) { return 0; }
+	LuaDispatcher::Register(rdPtr->luaMan->state);
+
+	if (rdPtr->luaMan->state->dispatcheri) {
+		rdPtr->luaMan->state->dispatcheri->Cleanup();
+		delete rdPtr->luaMan->state->dispatcheri;
 	}
-#endif
+	// make this optional?
+	//rdPtr->luaMan->state->dispatcheri->NewInstance(rdPtr->luaMan->state, rdPtr->luaMan->state->dispatcheri); // create userdata of the dispatcher than make it a global variable
+	//lua_setglobal(rdPtr->luaMan->state->state, "dispatcher");
 	return 0;
 }
 

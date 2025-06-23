@@ -101,7 +101,7 @@ public:
 		PACKAGE_DEBUG, PACKAGE_MATH, PACKAGE_JIT, PACKAGE_FFI, PACKAGE_BIT, PACKAGE_GL, PACKAGE_XLUA
 	};
 
-	LuaDispatcher dispatcheri;
+	LuaDispatcher *dispatcheri = nullptr;
 
 public:
 

@@ -126,7 +126,7 @@ typedef struct tagEDATA_V4
 	// Update 2
 	bool			autoReg;
 	bool			useBacktrace;
-	bool			unused2;
+	bool			useDISPATCHER;
 
 	// Update 3
 	int				numScripts;
@@ -140,7 +140,6 @@ typedef struct tagEDATA_V4
 	DWORD			unused3;
 	DWORD			unused4;
 	DWORD			unused5;
-	bool			useDISPATCHER;
 
 	EditRecord*		ScriptAtIndex(int index);
 	EditRecord*		LibAtIndex(int index);

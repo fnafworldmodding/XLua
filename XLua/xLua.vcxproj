@@ -547,6 +547,7 @@
     </ClCompile>
     <ClCompile Include="Edittime.cpp" />
     <ClCompile Include="General.cpp" />
+    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="LuaDispatcher.cpp" />
     <ClCompile Include="LuaJIT-2.0.5\src\xlua.cpp" />
     <ClCompile Include="LuaMMF.cpp" />
@@ -751,6 +752,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RunOnly|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RunOnlyUnicode|Win32'">true</ExcludedFromBuild>
     </CustomBuild>
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Information.h" />
     <CustomBuild Include="LuaMMF.h" />
     <ClInclude Include="LuaDispatcher.h" />

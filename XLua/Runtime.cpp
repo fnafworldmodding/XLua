@@ -10,6 +10,9 @@
 #include	"EditSetup.h"
 #include	"UnicodeHelpers.h"
 
+//
+#include "Globals.h"
+
 // --------------------
 // Debugger
 // --------------------
@@ -49,8 +52,11 @@ short WINAPI DLLExport GetRunObjectDataSize(fprh rhPtr, LPEDATA edPtr)
 // 
 short WINAPI DLLExport CreateRunObject(LPRDATA rdPtr, LPEDATA edPtr, fpcob cobPtr)
 {
-	rdPtr->luaMan = new XLuaObject();
-	rdPtr->luaMan->rdPtr = rdPtr;
+	MessageBoxA(NULL, "Message", "you should be able to debug now!", MB_OK);
+	if (!preInit) {
+		globalXLua = new XLuaObject();
+		rdPtr->luaMan = globalXLua;
+	}
 
 	rdPtr->luaMan->errMode = edPtr->errMode;
 	rdPtr->luaMan->printMode = edPtr->printMode;
@@ -81,10 +87,6 @@ short WINAPI DLLExport CreateRunObject(LPRDATA rdPtr, LPEDATA edPtr, fpcob cobPt
 			rdPtr->luaMan->state->mmfi.RegisterWin();
 		}
 #endif
-		if (edPtr->useDISPATCHER) {
-			rdPtr->luaMan->state->dispatcheri.Register(rdPtr->luaMan->state);
-		}
-
 		if (edPtr->loadLibs) {
 			rdPtr->luaMan->state->LoadDefaultLib(XLuaState::PACKAGE_ALL);
 		}
