@@ -1,11 +1,18 @@
 #include "LuaDispatcher.h"
-#include "lua.hpp"
 #include "Common.h"
 #include "Surface.h"
+#include "Globals.h"
 
-LuaDispatcher::LuaDispatcher(lua_State* lua_state) : L(lua_state) {}
 
-LuaDispatcher::LuaDispatcher() : L(nullptr) {}
+LuaDispatcher::LuaDispatcher(XLuaState* lua_state) : state(lua_state) {
+    _events = std::unordered_map<std::string, std::vector<int>>();
+}
+
+LuaDispatcher::LuaDispatcher() : state(nullptr) {
+    _events = std::unordered_map<std::string, std::vector<int>>();
+}
+
+void LuaDispatcher::SetState(XLuaState* L) { state = L; }
 
 void LuaDispatcher::Register(XLuaState* xluas) {
     if (xluas->state == nullptr) {
@@ -30,7 +37,15 @@ void LuaDispatcher::Register(XLuaState* xluas) {
         lua_setfield(L, -2, "__gc");
     }
     lua_pop(L, 1); // pop the metatable
-    lua_register(L, "Dispatcher", LuaDispatcher::NewInstance);
+    auto newInstanceLambda = [](lua_State* L) -> int {
+        void* userdata = lua_newuserdata(L, sizeof(LuaDispatcher));
+        new (userdata) LuaDispatcher(globalXLua->state);
+
+        luaL_getmetatable(L, LUA_DISPATCHER_METATABLE);
+        lua_setmetatable(L, -2);
+        return 1;
+        };
+    lua_register(L, "Dispatcher", newInstanceLambda);
 }
 
 void LuaDispatcher::Subscribe(const std::string& eventName, int funcRef) {
@@ -40,6 +55,7 @@ void LuaDispatcher::Subscribe(const std::string& eventName, int funcRef) {
 bool LuaDispatcher::Unsubscribe(const std::string& eventName, int funcToUnsubscribeIdx) {
     auto it = _events.find(eventName);
     if (it == _events.end()) return false;
+    lua_State* L = state->state;
 
     auto& funcRefs = it->second;
     for (auto ref_it = funcRefs.begin(); ref_it != funcRefs.end(); ++ref_it) {
@@ -59,6 +75,7 @@ bool LuaDispatcher::Unsubscribe(const std::string& eventName, int funcToUnsubscr
 void LuaDispatcher::Dispatch(const std::string& eventName, int argCount) {
     auto it = _events.find(eventName);
     if (it == _events.end()) return;
+    lua_State* L = state->state;
 
     std::vector<int> funcRefsCopy = it->second;
     for (int funcRef : funcRefsCopy) {
@@ -67,20 +84,23 @@ void LuaDispatcher::Dispatch(const std::string& eventName, int argCount) {
             lua_pushvalue(L, 3 + i);
         }
         if (lua_pcall(L, argCount, 0, 0) != 0) { // if not okay
-            std::cerr << "Error dispatching event '" << eventName << "': "
-                << lua_tostring(L, -1) << std::endl;
-            lua_pop(L, 1);
+            //state->RaiseError("Error dispatching event '" + eventName + "': " + lua_tostring(L, -1));
+            std::string errorMsg = "Error dispatching event '" + eventName + "': " + lua_tostring(L, -1);
+            std::cout << errorMsg << std::endl;
+            lua_pop(L, 1); // pop error message
         }
     }
 }
 
-int LuaDispatcher::NewInstance(lua_State* L) {
-    void* userdata = lua_newuserdata(L, sizeof(LuaDispatcher));
-    new (userdata) LuaDispatcher(L);
-    luaL_getmetatable(L, LUA_DISPATCHER_METATABLE);
-    lua_setmetatable(L, -2);
+int LuaDispatcher::NewInstance(XLuaState* xstate, LuaDispatcher*& dispatcher) {
+    void* userdata = lua_newuserdata(xstate->state, sizeof(LuaDispatcher));
+    new (userdata) LuaDispatcher(xstate);
+    dispatcher = static_cast<LuaDispatcher*>(userdata);
+    luaL_getmetatable(xstate->state, LUA_DISPATCHER_METATABLE);
+    lua_setmetatable(xstate->state, -2);
     return 1;
 }
+
 
 LuaDispatcher* LuaDispatcher::CheckInstance(lua_State* L, int index) {
     void* userdata = luaL_checkudata(L, index, LUA_DISPATCHER_METATABLE);
@@ -113,13 +133,19 @@ int LuaDispatcher::DispatchWrapper(lua_State* L) {
     return 0;
 }
 
-int LuaDispatcher::GC(lua_State* L) {
-    LuaDispatcher* dispatcher = CheckInstance(L);
+void LuaDispatcher::Cleanup(lua_State* L) {
+    if (this->_events.empty()) return;
+    lua_State* state = L != nullptr ? L : this->state->state;
 
-    for (const auto& pair : dispatcher->_events) {
+    for (const auto& pair : this->_events) {
         for (int ref : pair.second) {
-            luaL_unref(L, LUA_REGISTRYINDEX, ref);
+            luaL_unref(state, LUA_REGISTRYINDEX, ref);
         }
     }
+}
+
+int LuaDispatcher::GC(lua_State* L) {
+    LuaDispatcher* dispatcher = CheckInstance(L);
+    dispatcher->Cleanup(L);
     return 0;
 }

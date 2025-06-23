@@ -15,18 +15,20 @@ class XLuaState;
 
 class LuaDispatcher {
 public:
-    std::unordered_map<std::string, std::vector<int>> _events;
-    lua_State* L;
+    std::unordered_map<std::string, std::vector<int>> _events{};
+    XLuaState* state;
 
-    LuaDispatcher(lua_State* lua_state);
+    LuaDispatcher(XLuaState* lua_state);
     LuaDispatcher();
+    void SetState(XLuaState* L);
 
     static void Register(XLuaState* xluas);
     void Subscribe(const std::string& eventName, int funcRef);
     bool Unsubscribe(const std::string& eventName, int funcToUnsubscribeIdx);
     void Dispatch(const std::string& eventName, int argCount);
+    void Cleanup(lua_State* L = nullptr);
 
-    static int NewInstance(lua_State* L);
+    static int NewInstance(XLuaState* xstate, LuaDispatcher*& dispatcher);
     static LuaDispatcher* CheckInstance(lua_State* L, int index = 1);
     static int SubscribeWrapper(lua_State* L);
     static int UnsubscribeWrapper(lua_State* L);
