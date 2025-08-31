@@ -24,7 +24,6 @@ XLuaState::XLuaState ()
 	mmfi.SetState(this);
 	xlua.SetState(this);
 #endif
-	if (dispatcheri) dispatcheri->SetState(this);
 
 	luaopen_base(state);
 	luaJIT_setmode(state, 0, 0);

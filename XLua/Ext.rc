@@ -140,154 +140,150 @@ END
 
 #if defined(APSTUDIO_INVOKED) || defined(EDITOR)
 #if defined(APSTUDIO_INVOKED)
-MN_ACTIONS$(EDITOR) MENUEX
+MN_ACTIONS$(EDITOR) MENU
 #else
-MN_ACTIONS MENUEX
+MN_ACTIONS MENU
 #endif
 BEGIN
-    POPUP "",                               65535,MFT_STRING,MFS_ENABLED
+    POPUP ""
     BEGIN
-        POPUP "State",                          65535,MFT_STRING,MFS_ENABLED
+        POPUP "State"
         BEGIN
-            MENUITEM "Create State",                IDMN_ACT_CREATE_STATE,MFT_STRING,MFS_ENABLED
-            MENUITEM "Destroy State",               IDMN_ACT_DESTROY_STATE,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Bind State",                  IDMN_ACT_BIND_STATE,MFT_STRING,MFS_ENABLED
-            MENUITEM "Unbind State",                IDMN_ACT_UNBIND_STATE,MFT_STRING,MFS_ENABLED
+            MENUITEM "Create State",                IDMN_ACT_CREATE_STATE
+            MENUITEM "Destroy State",               IDMN_ACT_DESTROY_STATE
+            MENUITEM SEPARATOR
+            MENUITEM "Bind State",                  IDMN_ACT_BIND_STATE
+            MENUITEM "Unbind State",                IDMN_ACT_UNBIND_STATE
         END
-        POPUP "Config",                         65535,MFT_STRING,MFS_ENABLED
+        POPUP "Config"
         BEGIN
-            POPUP "Error Event Mode",               65535,MFT_STRING,MFS_ENABLED
+            POPUP "Error Event Mode"
             BEGIN
-                MENUITEM "Set Immediate",               IDMN_ACT_SET_ERROR_MODE_I,MFT_STRING,MFS_ENABLED
-                MENUITEM "Set Queued",                  IDMN_ACT_SET_ERROR_MODE_Q,MFT_STRING,MFS_ENABLED
+                MENUITEM "Set Immediate",               IDMN_ACT_SET_ERROR_MODE_I
+                MENUITEM "Set Queued",                  IDMN_ACT_SET_ERROR_MODE_Q
             END
-            POPUP "Print Event Mode",               65535,MFT_STRING,MFS_ENABLED
+            POPUP "Print Event Mode"
             BEGIN
-                MENUITEM "Set Immediate",               IDMN_ACT_SET_PRINT_MODE_I,MFT_STRING,MFS_ENABLED
-                MENUITEM "Set Queued",                  IDMN_ACT_SET_PRINT_MODE_I,MFT_STRING,MFS_ENABLED
+                MENUITEM "Set Immediate",               IDMN_ACT_SET_PRINT_MODE_I
+                MENUITEM "Set Queued",                  IDMN_ACT_SET_PRINT_MODE_I
             END
-            MENUITEM MFT_SEPARATOR
-            POPUP "Report Backtraces",              65535,MFT_STRING,MFS_ENABLED
+            MENUITEM SEPARATOR
+            POPUP "Report Backtraces"
             BEGIN
-                MENUITEM "Enable",                      IDMN_ACT_ENABLE_BACKTRACE,MFT_STRING,MFS_ENABLED
-                MENUITEM "Disable",                     IDMN_ACT_DISABLE_BACKTRACE,MFT_STRING,MFS_ENABLED
-            END
-        END
-        MENUITEM MFT_SEPARATOR
-        MENUITEM "Run File",                    IDMN_ACT_RUN_SOURCE_FILE,MFT_STRING,MFS_ENABLED
-        MENUITEM "Run String",                  IDMN_ACT_RUN_SOURCE_STRING,MFT_STRING,MFS_ENABLED
-        MENUITEM "Run Named String",            IDMN_ACT_RUN_SOURCE_STRING_NAMED,MFT_STRING,MFS_ENABLED
-        MENUITEM "Run Embedded Script",         IDMN_ACT_RUN_SOURCE_EMBEDDED,MFT_STRING,MFS_ENABLED
-        MENUITEM MFT_SEPARATOR
-        POPUP "Lua Functions",                  65535,MFT_STRING,MFS_ENABLED
-        BEGIN
-            MENUITEM "Push Integer Parameter",      IDMN_ACT_PUSH_INT_PARAM,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push Floating Parameter",     IDMN_ACT_PUSH_FLOAT_PARAM,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push String Parameter",       IDMN_ACT_PUSH_STRING_PARAM,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push Boolean Parameter",      IDMN_ACT_PUSH_BOOL_PARAM,MFT_STRING,MFS_ENABLED
-            POPUP "Push Table Parameter",           65535,MFT_STRING,MFS_ENABLED
-            BEGIN
-                MENUITEM "Begin Table",                 IDMN_ACT_PUSH_TABLE_PARAM_BEGIN,MFT_STRING,MFS_ENABLED
-                MENUITEM "End Table",                   IDMN_ACT_PUSH_TABLE_PARAM_END,MFT_STRING,MFS_ENABLED
-            END
-            MENUITEM "Push NIL",                    IDMN_ACT_PUSH_NIL_PARAM,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Call Lua Function",           IDMN_ACT_CALL_FUNCTION,MFT_STRING,MFS_ENABLED
-            POPUP "Inline Parameters",              65535,MFT_STRING,MFS_ENABLED
-            BEGIN
-                MENUITEM "Call With 1 Parameter",       IDMN_ACT_CALL_FUNC_INLINE_1,MFT_STRING,MFS_ENABLED
-                MENUITEM "Call With 2 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_2,MFT_STRING,MFS_ENABLED
-                MENUITEM "Call With 3 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_3,MFT_STRING,MFS_ENABLED
-                MENUITEM "Call With 4 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_4,MFT_STRING,MFS_ENABLED
-                MENUITEM MFT_SEPARATOR
-                MENUITEM "Call With Delimited String",  IDMN_ACT_CALL_FUNC_INLINE_DELIM,MFT_STRING,MFS_ENABLED
+                MENUITEM "Enable",                      IDMN_ACT_ENABLE_BACKTRACE
+                MENUITEM "Disable",                     IDMN_ACT_DISABLE_BACKTRACE
             END
         END
-        POPUP "MMF Functions",                  65535,MFT_STRING,MFS_ENABLED
+        MENUITEM SEPARATOR
+        MENUITEM "Run File",                    IDMN_ACT_RUN_SOURCE_FILE
+        MENUITEM "Run String",                  IDMN_ACT_RUN_SOURCE_STRING
+        MENUITEM "Run Named String",            IDMN_ACT_RUN_SOURCE_STRING_NAMED
+        MENUITEM "Run Embedded Script",         IDMN_ACT_RUN_SOURCE_EMBEDDED
+        MENUITEM SEPARATOR
+        POPUP "Lua Functions"
         BEGIN
-            MENUITEM "Push Integer Return Value",   IDMN_ACT_PUSH_INT_RETURN,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push Floating Return Value",  IDMN_ACT_PUSH_FLOAT_RETURN,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push String Return Value",    IDMN_ACT_PUSH_STRING_RETURN,MFT_STRING,MFS_ENABLED
-            MENUITEM "Push Boolean Return Value",   IDMN_ACT_PUSH_BOOL_RETURN,MFT_STRING,MFS_ENABLED
-            POPUP "Push Table Return Value",        65535,MFT_STRING,MFS_ENABLED
+            MENUITEM "Push Integer Parameter",      IDMN_ACT_PUSH_INT_PARAM
+            MENUITEM "Push Floating Parameter",     IDMN_ACT_PUSH_FLOAT_PARAM
+            MENUITEM "Push String Parameter",       IDMN_ACT_PUSH_STRING_PARAM
+            MENUITEM "Push Boolean Parameter",      IDMN_ACT_PUSH_BOOL_PARAM
+            POPUP "Push Table Parameter"
             BEGIN
-                MENUITEM "Begin Table",                 IDMN_ACT_PUSH_TABLE_RETURN_BEGIN,MFT_STRING,MFS_ENABLED
-                MENUITEM "End Table",                   IDMN_ACT_PUSH_TABLE_RETURN_END,MFT_STRING,MFS_ENABLED
+                MENUITEM "Begin Table",                 IDMN_ACT_PUSH_TABLE_PARAM_BEGIN
+                MENUITEM "End Table",                   IDMN_ACT_PUSH_TABLE_PARAM_END
             END
-            MENUITEM "Push NIL",                    IDMN_ACT_PUSH_NIL_RETURN,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Register MMF Function",       IDMN_ACT_REGISTER_FUNCTION,MFT_STRING,MFS_ENABLED
-            MENUITEM "Invoke MMF Function",         IDMN_ACT_INVOKE_MMF_FUNCTION,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            POPUP "Function Groups",                65535,MFT_STRING,MFS_ENABLED
+            MENUITEM "Push NIL",                    IDMN_ACT_PUSH_NIL_PARAM
+            MENUITEM SEPARATOR
+            MENUITEM "Call Lua Function",           IDMN_ACT_CALL_FUNCTION
+            POPUP "Inline Parameters"
             BEGIN
-                MENUITEM "Register MMF Function.A",     IDMN_ACT_REGISTER_FUNCTION_A,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.B",     IDMN_ACT_REGISTER_FUNCTION_B,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.C",     IDMN_ACT_REGISTER_FUNCTION_C,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.D",     IDMN_ACT_REGISTER_FUNCTION_D,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.E",     IDMN_ACT_REGISTER_FUNCTION_E,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.F",     IDMN_ACT_REGISTER_FUNCTION_F,MFT_STRING,MFS_ENABLED
-                MENUITEM "Register MMF Function.G",     IDMN_ACT_REGISTER_FUNCTION_G,MFT_STRING,MFS_ENABLED
+                MENUITEM "Call With 1 Parameter",       IDMN_ACT_CALL_FUNC_INLINE_1
+                MENUITEM "Call With 2 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_2
+                MENUITEM "Call With 3 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_3
+                MENUITEM "Call With 4 Parameters",      IDMN_ACT_CALL_FUNC_INLINE_4
+                MENUITEM SEPARATOR
+                MENUITEM "Call With Delimited String",  IDMN_ACT_CALL_FUNC_INLINE_DELIM
             END
         END
-        MENUITEM MFT_SEPARATOR
-        POPUP "Variables",                      65535,MFT_STRING,MFS_ENABLED
+        POPUP "MMF Functions"
         BEGIN
-            MENUITEM "Set Integer Variable",        IDMN_ACT_SET_INT_VAR,MFT_STRING,MFS_ENABLED
-            MENUITEM "Set Floating Variable",       IDMN_ACT_SET_FLOAT_VAR,MFT_STRING,MFS_ENABLED
-            MENUITEM "Set String Variable",         IDMN_ACT_SET_STRING_VAR,MFT_STRING,MFS_ENABLED
-            MENUITEM "Set Boolean Variable",        IDMN_ACT_SET_BOOL_VAR,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Delete Variable",             IDMN_ACT_DELETE_VAR,MFT_STRING,MFS_ENABLED
+            MENUITEM "Push Integer Return Value",   IDMN_ACT_PUSH_INT_RETURN
+            MENUITEM "Push Floating Return Value",  IDMN_ACT_PUSH_FLOAT_RETURN
+            MENUITEM "Push String Return Value",    IDMN_ACT_PUSH_STRING_RETURN
+            MENUITEM "Push Boolean Return Value",   IDMN_ACT_PUSH_BOOL_RETURN
+            POPUP "Push Table Return Value"
+            BEGIN
+                MENUITEM "Begin Table",                 IDMN_ACT_PUSH_TABLE_RETURN_BEGIN
+                MENUITEM "End Table",                   IDMN_ACT_PUSH_TABLE_RETURN_END
+            END
+            MENUITEM "Push NIL",                    IDMN_ACT_PUSH_NIL_RETURN
+            MENUITEM SEPARATOR
+            MENUITEM "Register MMF Function",       IDMN_ACT_REGISTER_FUNCTION
+            MENUITEM "Invoke MMF Function",         IDMN_ACT_INVOKE_MMF_FUNCTION
+            MENUITEM SEPARATOR
+            POPUP "Function Groups"
+            BEGIN
+                MENUITEM "Register MMF Function.A",     IDMN_ACT_REGISTER_FUNCTION_A
+                MENUITEM "Register MMF Function.B",     IDMN_ACT_REGISTER_FUNCTION_B
+                MENUITEM "Register MMF Function.C",     IDMN_ACT_REGISTER_FUNCTION_C
+                MENUITEM "Register MMF Function.D",     IDMN_ACT_REGISTER_FUNCTION_D
+                MENUITEM "Register MMF Function.E",     IDMN_ACT_REGISTER_FUNCTION_E
+                MENUITEM "Register MMF Function.F",     IDMN_ACT_REGISTER_FUNCTION_F
+                MENUITEM "Register MMF Function.G",     IDMN_ACT_REGISTER_FUNCTION_G
+            END
         END
-        POPUP "Local Storage",                  65535,MFT_STRING,MFS_ENABLED
+        MENUITEM SEPARATOR
+        POPUP "Variables"
         BEGIN
-            MENUITEM "Set Local Value",             IDMN_ACT_SET_LOCAL_VAL,MFT_STRING,MFS_ENABLED
-            MENUITEM "Set Local String",            IDMN_ACT_SET_LOCAL_STRING,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Reset Local Storage",         IDMN_ACT_RESET_LOCAL_STORE,MFT_STRING,MFS_ENABLED
+            MENUITEM "Set Integer Variable",        IDMN_ACT_SET_INT_VAR
+            MENUITEM "Set Floating Variable",       IDMN_ACT_SET_FLOAT_VAR
+            MENUITEM "Set String Variable",         IDMN_ACT_SET_STRING_VAR
+            MENUITEM "Set Boolean Variable",        IDMN_ACT_SET_BOOL_VAR
+            MENUITEM SEPARATOR
+            MENUITEM "Delete Variable",             IDMN_ACT_DELETE_VAR
         END
-        MENUITEM MFT_SEPARATOR
-        POPUP "Libraries",                      65535,MFT_STRING,MFS_ENABLED
+        POPUP "Local Storage"
         BEGIN
-            MENUITEM "Open All Libraries",          IDMN_ACT_OPEN_LIBS_ALL,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open External C Module",      IDMN_ACT_OPEN_C_LIB,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Open Base",                   IDMN_ACT_OPEN_LIBS_BASE,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'package'",              IDMN_ACT_OPEN_LIBS_PACKAGE,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'table'",                IDMN_ACT_OPEN_LIBS_TABLE,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'io'",                   IDMN_ACT_OPEN_LIBS_IO,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'os'",                   IDMN_ACT_OPEN_LIBS_OS,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'string'",               IDMN_ACT_OPEN_LIBS_STRING,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'math'",                 IDMN_ACT_OPEN_LIBS_MATH,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'debug'",                IDMN_ACT_OPEN_LIBS_DEBUG,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'bit'",                  IDMN_ACT_OPEN_LIBS_BIT,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'jit'",                  IDMN_ACT_OPEN_LIBS_JIT,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open 'ffi'",                  IDMN_ACT_OPEN_LIBS_FFI,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Enable LuaJIT",               IDMN_ACT_ENABLE_JIT,MFT_STRING,MFS_ENABLED
+            MENUITEM "Set Local Value",             IDMN_ACT_SET_LOCAL_VAL
+            MENUITEM "Set Local String",            IDMN_ACT_SET_LOCAL_STRING
+            MENUITEM SEPARATOR
+            MENUITEM "Reset Local Storage",         IDMN_ACT_RESET_LOCAL_STORE
         END
-        POPUP "MMF Interface",                  65535,MFT_STRING,MFS_ENABLED
+        MENUITEM SEPARATOR
+        POPUP "Libraries"
         BEGIN
-            MENUITEM "Enable",                      IDMN_ACT_ENABLE_MMFI,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Export Object",               IDMN_ACT_EXPORT_OBJECT,MFT_STRING,MFS_ENABLED
-            MENUITEM "Export Object by Fixed ID",   IDMN_ACT_EXPORT_OBJECT_FIXED,MFT_STRING,MFS_ENABLED
-            MENUITEM "Clear Export",                IDMN_ACT_CLEAR_MMFI_EXPORT,MFT_STRING,MFS_ENABLED
-            MENUITEM "Reset Exports",               IDMN_ACT_RESET_MMFI_EXPORTS,MFT_STRING,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Capture Selection List",      IDMN_ACT_CAPTURE_SEL_LIST,MFT_STRING,MFS_ENABLED
+            MENUITEM "Open All Libraries",          IDMN_ACT_OPEN_LIBS_ALL
+            MENUITEM "Open External C Module",      IDMN_ACT_OPEN_C_LIB
+            MENUITEM SEPARATOR
+            MENUITEM "Open Base",                   IDMN_ACT_OPEN_LIBS_BASE
+            MENUITEM "Open 'package'",              IDMN_ACT_OPEN_LIBS_PACKAGE
+            MENUITEM "Open 'table'",                IDMN_ACT_OPEN_LIBS_TABLE
+            MENUITEM "Open 'io'",                   IDMN_ACT_OPEN_LIBS_IO
+            MENUITEM "Open 'os'",                   IDMN_ACT_OPEN_LIBS_OS
+            MENUITEM "Open 'string'",               IDMN_ACT_OPEN_LIBS_STRING
+            MENUITEM "Open 'math'",                 IDMN_ACT_OPEN_LIBS_MATH
+            MENUITEM "Open 'debug'",                IDMN_ACT_OPEN_LIBS_DEBUG
+            MENUITEM "Open 'bit'",                  IDMN_ACT_OPEN_LIBS_BIT
+            MENUITEM "Open 'jit'",                  IDMN_ACT_OPEN_LIBS_JIT
+            MENUITEM "Open 'ffi'",                  IDMN_ACT_OPEN_LIBS_FFI
+            MENUITEM SEPARATOR
+            MENUITEM "Enable LuaJIT",               IDMN_ACT_ENABLE_JIT
         END
-        POPUP "WINI Interface",                 65535,MFT_STRING,MFS_ENABLED
+        POPUP "MMF Interface"
         BEGIN
-            MENUITEM "Enable",                      IDMN_ACT_ENABLE_DISPATCHER,MFT_STRING | MFT_RIGHTORDER,MFS_ENABLED
-            MENUITEM MFT_SEPARATOR
-            MENUITEM "Reset Exports",               IDMN_ACT_RESET_WINI_EXPORTS,MFT_STRING,MFS_ENABLED
+            MENUITEM "Enable",                      IDMN_ACT_ENABLE_MMFI
+            MENUITEM SEPARATOR
+            MENUITEM "Export Object",               IDMN_ACT_EXPORT_OBJECT
+            MENUITEM "Export Object by Fixed ID",   IDMN_ACT_EXPORT_OBJECT_FIXED
+            MENUITEM "Clear Export",                IDMN_ACT_CLEAR_MMFI_EXPORT
+            MENUITEM "Reset Exports",               IDMN_ACT_RESET_MMFI_EXPORTS
+            MENUITEM SEPARATOR
+            MENUITEM "Capture Selection List",      IDMN_ACT_CAPTURE_SEL_LIST
         END
-        POPUP "DISPATCHER Interface",           65535,MFT_STRING,MFS_ENABLED
+        POPUP "WINI Interface"
         BEGIN
-            MENUITEM "Enable",                      IDMN_ACT_ENABLE_WINI,MFT_STRING,MFS_ENABLED
+            MENUITEM "Enable",                      IDMN_ACT_ENABLE_DISPATCHER
+            MENUITEM SEPARATOR
+            MENUITEM "Reset Exports",               IDMN_ACT_RESET_WINI_EXPORTS
         END
     END
 END
@@ -499,11 +495,6 @@ BEGIN
     M_ACT_UNBIND_STATE      "Unbind Lua State"
     M_ACT_INVOKE_MMF_FUNCTION "Invoke MMF Function: %0"
     M_ACT_PUSH_FLOAT_PARAM  "Push Floating Parameter: %0"
-END
-
-STRINGTABLE
-BEGIN
-    M_ACT_ENABLE_DISPATCHERI "Enable DISPATCHERI Interface"
 END
 
 STRINGTABLE

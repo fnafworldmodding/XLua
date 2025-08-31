@@ -100,12 +100,6 @@ public:
 		PACKAGE_ALL, PACKAGE_BASE, PACKAGE_IO, PACKAGE_TABLE, PACKAGE_PACKAGE, PACKAGE_OS, PACKAGE_STRING, 
 		PACKAGE_DEBUG, PACKAGE_MATH, PACKAGE_JIT, PACKAGE_FFI, PACKAGE_BIT, PACKAGE_GL, PACKAGE_XLUA
 	};
-
-<<<<<<< HEAD
-	LuaDispatcher *dispatcheri = nullptr;
-
-=======
->>>>>>> parent of 467baee (feat: Dispatcher, dispatcher, allows to sub to EndFrame, StartFrame, etc)
 public:
 
 	XLuaState ();

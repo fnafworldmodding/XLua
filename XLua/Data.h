@@ -126,7 +126,7 @@ typedef struct tagEDATA_V4
 	// Update 2
 	bool			autoReg;
 	bool			useBacktrace;
-	bool			useDISPATCHER;
+	bool			unused2;
 
 	// Update 3
 	int				numScripts;

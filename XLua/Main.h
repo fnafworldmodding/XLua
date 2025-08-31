@@ -105,8 +105,7 @@
 #define ACT_PUSH_TABLE_RETURN_BEGIN	74
 #define ACT_PUSH_TABLE_RETURN_END	75
 #define ACT_OPEN_LIBS_FFI			76
-#define ACT_ENABLE_DISPATCHERI 		77
-#define	ACT_LAST					78
+#define	ACT_LAST					77
 
 // -------------------------------
 // DEFINITION OF EXPRESSIONS CODES
