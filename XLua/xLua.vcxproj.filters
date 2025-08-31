@@ -416,15 +416,6 @@
     <ClInclude Include="UnicodeHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="LuaDispatcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
->>>>>>> parent of 467baee (feat: Dispatcher, dispatcher, allows to sub to EndFrame, StartFrame, etc)
   </ItemGroup>
   <ItemGroup>
     <None Include="Ext.def">
