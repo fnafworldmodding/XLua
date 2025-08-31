@@ -56,17 +56,6 @@ inline void fp_precision_restore (unsigned control_word) {
 	__control87_2(control_word, MCW_PC, &control_ret, 0);
 }
 
-
-inline bool ParamCheck(lua_State* L, int params) {
-	int paramCount = lua_gettop(L);
-	if (paramCount != params) {
-		lua_pushstring(L, "Invalid parameter count");
-		lua_error(L);
-		return false;
-	}
-	return true;
-}
-
 // Used to ensure the MMF version is 1.5, you can safely ignore this
 #if defined(MMFEXT)
 #define	IS_COMPATIBLE(v) (v->mvGetVersion != NULL && (v->mvGetVersion() & MMFBUILD_MASK) >= MINBUILD && (v->mvGetVersion() & MMFVERSION_MASK) >= MMFVERSION_20 && ((v->mvGetVersion() & MMFVERFLAG_MASK) & MMFVERFLAG_HOME) == 0)

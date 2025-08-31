@@ -87,6 +87,10 @@ short WINAPI DLLExport CreateRunObject(LPRDATA rdPtr, LPEDATA edPtr, fpcob cobPt
 			rdPtr->luaMan->state->mmfi.RegisterWin();
 		}
 #endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 467baee (feat: Dispatcher, dispatcher, allows to sub to EndFrame, StartFrame, etc)
 		if (edPtr->loadLibs) {
 			rdPtr->luaMan->state->LoadDefaultLib(XLuaState::PACKAGE_ALL);
 		}

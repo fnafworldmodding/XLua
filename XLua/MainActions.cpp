@@ -375,10 +375,11 @@ short WINAPI DLLExport ActSetLocalStr(LPRDATA rdPtr, long param1, long param2) {
 
 // ActEnableMMFI ()
 short WINAPI DLLExport ActEnableMMFI(LPRDATA rdPtr, long param1, long param2) {
-#ifdef XLUA_LEGACY
+	#ifdef XLUA_LEGACY
 	if (rdPtr->luaMan->state) {
 		rdPtr->luaMan->state->mmfi.Register();
 	}
+<<<<<<< HEAD
 #endif
 	return 0;
 }
@@ -395,6 +396,9 @@ short WINAPI DLLExport ActEnableDISPATCHERI(LPRDATA rdPtr, long param1, long par
 	// make this optional?
 	//rdPtr->luaMan->state->dispatcheri->NewInstance(rdPtr->luaMan->state, rdPtr->luaMan->state->dispatcheri); // create userdata of the dispatcher than make it a global variable
 	//lua_setglobal(rdPtr->luaMan->state->state, "dispatcher");
+=======
+	#endif
+>>>>>>> parent of 467baee (feat: Dispatcher, dispatcher, allows to sub to EndFrame, StartFrame, etc)
 	return 0;
 }
 

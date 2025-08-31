@@ -48,7 +48,6 @@ enum {
 	PROPID_RUNSCRIPT,
 	PROPID_STD_LIBS,
 	PROPID_AUTOREG,
-	PROPID_USE_DISPATCHER
 };
 
 PropData Properties[] = {
@@ -58,7 +57,6 @@ PropData Properties[] = {
 	PropData_Group(PROPID_GROUP_INTERFACE, PSTR("Interfaces"), PSTR("Interfaces")),
 	PropData_CheckBox(PROPID_USE_MMF, PSTR("Use MMF Interface"), PSTR("...")),
 	PropData_CheckBox(PROPID_USE_WIN, PSTR("Use WIN Interface"), PSTR("...")),
-	PropData_CheckBox(PROPID_USE_DISPATCHER, PSTR("Use Dispatcher Interface"), PSTR("...")),
 
 	PropData_Group(PROPID_GROUP_QUEUE, PSTR("Standard I/O"), PSTR("Standard I/O")),
 	PropData_ComboBox(PROPID_ERRQUEUE_MODE, PSTR("Error Events"), PSTR("Error event handling"), propModeList),
@@ -190,8 +188,6 @@ BOOL WINAPI DLLExport GetPropCheck(LPMV mV, LPEDATA edPtr, UINT nPropID)
 	case PROPID_USE_BT:
 		return edPtr->useBacktrace;
 
-	case PROPID_USE_DISPATCHER:
-		return edPtr->useDISPATCHER;
 	}
 
 #endif // !RUN_ONLY
@@ -262,10 +258,6 @@ void WINAPI DLLExport SetPropCheck(LPMV mV, LPEDATA edPtr, UINT nPropID, BOOL nC
 
 	case PROPID_USE_BT:
 		edPtr->useBacktrace = (nCheck != 0);
-		break;
-
-	case PROPID_USE_DISPATCHER:
-		edPtr->useDISPATCHER = (nCheck != 0);
 		break;
 
 	}

@@ -547,8 +547,6 @@
     </ClCompile>
     <ClCompile Include="Edittime.cpp" />
     <ClCompile Include="General.cpp" />
-    <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="LuaDispatcher.cpp" />
     <ClCompile Include="LuaJIT-2.0.5\src\xlua.cpp" />
     <ClCompile Include="LuaMMF.cpp" />
     <ClCompile Include="LuaParam.cpp" />
@@ -755,7 +753,6 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Information.h" />
     <CustomBuild Include="LuaMMF.h" />
-    <ClInclude Include="LuaDispatcher.h" />
     <ClInclude Include="LuaParam.h" />
     <CustomBuild Include="LuaXLua.h" />
     <ClInclude Include="Lua\dasm_proto.h" />

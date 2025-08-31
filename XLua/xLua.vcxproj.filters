@@ -183,12 +183,6 @@
     <ClCompile Include="LuaJIT-2.0.5\src\xlua.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LuaDispatcher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CallStackFrame.h">
@@ -422,12 +416,15 @@
     <ClInclude Include="UnicodeHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="LuaDispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> parent of 467baee (feat: Dispatcher, dispatcher, allows to sub to EndFrame, StartFrame, etc)
   </ItemGroup>
   <ItemGroup>
     <None Include="Ext.def">
